@@ -9,14 +9,14 @@ socket.connect({
   port: 2000,
   host: '127.0.0.1',
 }, function() {
-  socket.on('data', function(data) {
-    task = JSON.parse(data);
-    console.log('Data received (by client): ' + task);
+    socket.on('data', function(data) {
+    paskage = JSON.parse(data);
+    console.log('Data received (by worker): ' + paskage.task);
       
-    result = task.map(function(item) {
+    paskage.task = paskage.task.map(function(item) {
       return item * 2;}) 
     
-    console.log('Data sended (by client): ' + result);
-    socket.write(JSON.stringify(result));
+    console.log('Data sended (by worker): ' + paskage.task);
+    socket.write(JSON.stringify(paskage));
   });
 });
